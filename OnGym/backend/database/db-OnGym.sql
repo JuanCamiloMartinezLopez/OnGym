@@ -8,11 +8,11 @@ USE `OnGymDB` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnGymDB`.`Entrenador` (
   `idEntrenador` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `nombres` VARCHAR(15) NOT NULL,
-  `primerapellido` VARCHAR(10) NOT NULL,
-  `segundoapellido` VARCHAR(10) NULL,
-  `correo` VARCHAR(25) NOT NULL,
-  `contraseña` VARCHAR(10) NOT NULL,
+  `nombres` VARCHAR(30) NOT NULL,
+  `primerapellido` VARCHAR(20) NOT NULL,
+  `segundoapellido` VARCHAR(20) NULL,
+  `correo` VARCHAR(40) NOT NULL,
+  `contraseña` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`idEntrenador`))
 ENGINE = InnoDB;
 
@@ -22,15 +22,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnGymDB`.`Deportista` (
   `idDeportista` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `nombres` VARCHAR(15) NOT NULL,
-  `primerapellido` VARCHAR(10) NOT NULL,
-  `segundoapellido` VARCHAR(10) NULL,
-  `correo` VARCHAR(25) NOT NULL,
-  `contraseña` VARCHAR(10) NOT NULL,
-  `direccion` VARCHAR(20) NULL,
-  `telefono` INT NULL,
+  `nombres` VARCHAR(30) NOT NULL,
+  `primerapellido` VARCHAR(20) NOT NULL,
+  `segundoapellido` VARCHAR(20) NULL,
+  `correo` VARCHAR(40) NOT NULL,
+  `contraseña` VARCHAR(80) NOT NULL,
+  `direccion` VARCHAR(50) NULL,
+  `telefono` VARCHAR(15) NULL,
   `peso` INT NULL,
-  `estatura` INT NULL,
+  `estatura` FLOAT(3,2) UNSIGNED NULL,
   `idEntrenadorD` INT UNSIGNED NULL,
   PRIMARY KEY (`idDeportista`),
   INDEX `idEntrenadorD` (`idEntrenadorD` ASC) VISIBLE,
