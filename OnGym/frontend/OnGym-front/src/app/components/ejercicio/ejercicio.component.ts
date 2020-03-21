@@ -12,4 +12,8 @@ export class EjercicioComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  crearEjercicio(){
+    
+  }
+
 }

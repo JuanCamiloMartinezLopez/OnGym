@@ -12,4 +12,8 @@ export class RegistroAtletaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  registroatleta(){
+
+  }
+
 }

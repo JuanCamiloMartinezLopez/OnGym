@@ -1,1 +1,32 @@
-<p>registro-entrenador works!</p>
+<div class="row">
+    <div class="col-md-4 mx-auto">
+      <br><br>
+      <div class="card">
+        <div class="card-header">
+          Registro
+        </div>
+        <div class="card-body">
+          <form (submit)="registroentrenador()">
+            <div class="form-group">
+              <input type="text" name="nombres" class="form-control" placeholder="Nombres" required autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="primerapellido" class="form-control" placeholder="Primer apellido" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="segundoapellido" class="form-control" placeholder="Segundo apellido" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="correo" class="form-control" placeholder="Correo" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
+            </div>
+            <button mat-stroked-button type="button">
+              Registrarse
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

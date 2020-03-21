@@ -1,1 +1,27 @@
-<p>rutina works!</p>
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <br><br><br>
+        <div class="card">
+          <div class="card-body">
+            <mat-form-field>
+                <mat-label>Escoja un ejercicio</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let ejercicio of ejercicios" [value]="ejercicio.value">
+                    {{ejercicio.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+          </div>
+        </div>
+        <br><br>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Aquí la jijueputa imagen ;v">
+            <div class="card-body">
+              <h5 class="card-title">Nombre del Ejercicio</h5>
+              <p class="card-text">Descripción</p>
+              <a href="#" class="btn btn-primary">Agregar ejercicio</a>
+            </div>
+          </div>
+    </div>
+</div>

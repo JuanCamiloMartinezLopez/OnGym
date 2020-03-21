@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PorfileComponent } from './porfile.component';
+import { MirarAtletasComponent } from './mirar-atletas.component';
 
-describe('PorfileComponent', () => {
-  let component: PorfileComponent;
-  let fixture: ComponentFixture<PorfileComponent>;
+describe('MirarAtletasComponent', () => {
+  let component: MirarAtletasComponent;
+  let fixture: ComponentFixture<MirarAtletasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PorfileComponent ]
+      declarations: [ MirarAtletasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PorfileComponent);
+    fixture = TestBed.createComponent(MirarAtletasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,4 +12,7 @@ export class RegistroEntrenadorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  registroentrenador(){
+    
+  }
 }
