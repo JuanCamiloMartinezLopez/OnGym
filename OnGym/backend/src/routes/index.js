@@ -68,20 +68,20 @@ router.post('/registroEntrenador', async(req, res) => {
 })
 
 router.post('/registroDeportista', async(req, res) => {
-    const { nombres, primerapellido, segundoapellido, correo, contraseña, direccion, telefono, peso, estatura, idEntrenadorD } = req.body;
+    const { nombres, primerapellido, segundoapellido, correo, password, direccion, telefono, peso, estatura, idEntrenadorD } = req.body;
     let newDeportista = {
         nombres,
         primerapellido,
         segundoapellido,
         correo,
-        contraseña,
+        contraseña: password,
         direccion,
         telefono,
         peso,
         estatura,
         idEntrenadorD
     }
-    newDeportista.contraseña = await helpers.encryptPassword(contraseña);
+    newDeportista.contraseña = await helpers.encryptPassword(password);
     await pool.query('INSERT INTO deportista set ?', newDeportista, function(error, results, fields) {
         if (error) {
             console.log(error);

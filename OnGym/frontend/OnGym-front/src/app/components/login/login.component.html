@@ -13,14 +13,14 @@
                     <div class="form-group">
                         <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Contraseña" required>
                     </div>
-                    <button mat-stroked-button type="submit">
+                    <button mat-stroked-button routerLink={{profileRedirect}} type="submit">
             Iniciar Sesión
           </button>
                     <br><br>
                     <div class="form-group">
                         Si no está registrado, lo puede hacer acá:
                     </div>
-                    <button mat-stroked-button type="button" routerLink={{routeRedirect}}>
+                    <button mat-stroked-button type="button" routerLink={{registroRedirect}}>
             Registro
           </button>
                 </form>

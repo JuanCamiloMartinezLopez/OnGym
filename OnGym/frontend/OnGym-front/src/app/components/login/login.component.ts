@@ -14,16 +14,19 @@ export class LoginComponent implements OnInit {
     password:'',
     type:''
   }
-  routeRedirect;
+  registroRedirect;
+  profileRedirect;
   constructor(private cb:ConnectionBackendService, private rutaActiva:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.user.type=this.rutaActiva.snapshot.params.type;
     console.log(this.user.type);
     if(this.user.type=='entrenador'){
-      this.routeRedirect="/registroEntrenador";
+      this.registroRedirect="/registroEntrenador";
+      this.profileRedirect="/perfilEntrenador";
     }else{
-      this.routeRedirect="/registroDeportista";
+      this.registroRedirect="/registroDeportista";
+      this.profileRedirect="/perfilDeportista";
     }
   }
 
