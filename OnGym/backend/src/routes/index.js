@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', async(req, res) => {
-    const { correo, contraseña, type } = req.body;
+    const { correo, password, type } = req.body;
     const newUser = {
         correo,
-        contraseña
+        contraseña: password
     }
     console.log(newUser)
     pool.query('SELECT * FROM ' + type + ' WHERE correo=? ', [correo], async function(error, results, fields) {
@@ -24,7 +24,7 @@ router.post('/login', async(req, res) => {
         if (results.length > 0) {
             const user = results[0];
             console.log(user);
-            const validPassword = await helpers.matchPassword(contraseña, user.contraseña)
+            const validPassword = await helpers.matchPassword(password, user.contraseña)
             if (validPassword) {
                 if (type == 'entrenador') {
                     const token = jwt.sign({ _id: user.idEntrenador, _type: type }, 'secret');
@@ -44,15 +44,15 @@ router.post('/login', async(req, res) => {
 })
 
 router.post('/registroEntrenador', async(req, res) => {
-    const { nombres, primerapellido, segundoapellido, correo, contraseña } = req.body;
+    const { nombres, primerapellido, segundoapellido, correo, password } = req.body;
     let newEntrenador = {
         nombres,
         primerapellido,
         segundoapellido,
         correo,
-        contraseña
+        contraseña: password
     }
-    newEntrenador.contraseña = await helpers.encryptPassword(contraseña);
+    newEntrenador.contraseña = await helpers.encryptPassword(password);
     await pool.query('INSERT INTO entrenador set ?', newEntrenador, async function(error, results, fields) {
         if (error) {
             console.log(error);

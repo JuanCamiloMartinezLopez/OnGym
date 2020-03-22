@@ -18,7 +18,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'login',
+    path: 'login/:type',
     component: LoginComponent
   },
   {
@@ -26,23 +26,23 @@ const routes: Routes = [
     component: EjercicioComponent
   },
   {
-    path: 'perfil-atleta',
+    path: 'perfilDeportista',
     component: PerfilAtletaComponent
   },
   {
-    path: 'perfil-entrenador',
+    path: 'perfilEntrenador',
     component: PerfilEntrenadorComponent
   },
   {
-    path: 'mirar-atletas',
+    path: 'mirarDeportistas',
     component: MirarAtletasComponent
   },
   {
-    path: 'registro-atleta',
+    path: 'registroDeportista',
     component: RegistroAtletaComponent
   },
   {
-    path: 'registro-entrenador',
+    path: 'registroEntrenador',
     component: RegistroEntrenadorComponent
   },
   {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ConnectionBackendService} from '../../services/connection-backend.service';
 
 @Component({
   selector: 'app-registro-entrenador',
@@ -7,12 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroEntrenadorComponent implements OnInit {
 
-  constructor() { }
 
+  constructor(private cb:ConnectionBackendService) { }
+  entrenador={
+    nombres:'',
+    primerapellido:'',
+    segundoapellido:'',
+    correo:'',
+    password:'',
+  }
   ngOnInit(): void {
   }
 
   registroentrenador(){
-    
+    console.log(this.entrenador);
+    this.cb.RegistroEntrenador(this.entrenador).subscribe(res =>{
+      console.log(res)
+    },
+    err=>{
+      console.log(err)
+    });
   }
 }
