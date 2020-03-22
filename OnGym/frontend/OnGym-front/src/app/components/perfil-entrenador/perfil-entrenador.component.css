@@ -6,8 +6,15 @@ div.row{
 	margin:auto;
 	width:100%;
     height:100%;
+    text-align: center;
 }
 
-div.card-body{
-    text-align: center;
+div.card{
+    background-color: whitesmoke;
+    width : 300px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    font-family: georgia;
+    font-size: 15px;
 }

@@ -20,12 +20,16 @@ div#derecha{
 	float: right;
 }
 
-button {
+button.btn {
     margin: 10px 10px;
     width: 95%;
     height: 95%;
-    font-size: 40px;
+    font-size: 60px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: georgia;
+    color:white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
