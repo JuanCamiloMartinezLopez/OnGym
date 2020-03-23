@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4 mx-auto">
+    <div class="container">
         <br><br><br>
         <div class="card">
             <div class="card-header">
@@ -13,16 +13,22 @@
                     <div class="form-group">
                         <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Contraseña" required>
                     </div>
+<<<<<<< HEAD
                     <button mat-stroked-button type="submit">
             Iniciar Sesión
           </button>
+=======
+                    <button routerLink={{profileRedirect}} type="submit" class="btn btn-primary">
+                        Iniciar Sesión
+                    </button>
+>>>>>>> 92cf15bad4a23afc491c268362fb852ad806bac2
                     <br><br>
                     <div class="form-group">
                         Si no está registrado, lo puede hacer acá:
                     </div>
-                    <button mat-stroked-button type="button" routerLink={{registroRedirect}}>
-            Registro
-          </button>
+                    <button type="button" class="btn btn-primary" routerLink={{registroRedirect}}>
+                        Registro
+                    </button>
                 </form>
             </div>
         </div>
