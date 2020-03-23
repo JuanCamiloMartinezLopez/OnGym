@@ -22,6 +22,7 @@ app.use(cors());
 //routes
 app.use('/OnGym-api', require('./routes/index.js'));
 
+
 //public
 app.use(express.static(path.join(__dirname, 'public')));
 

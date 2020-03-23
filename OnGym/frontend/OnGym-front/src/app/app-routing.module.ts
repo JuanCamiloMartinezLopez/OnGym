@@ -11,6 +11,7 @@ import {PerfilAtletaComponent} from "./components/perfil-atleta/perfil-atleta.co
 import {PerfilEntrenadorComponent} from "./components/perfil-entrenador/perfil-entrenador.component"
 import {RutinaComponent} from "./components/rutina/rutina.component"
 import { HomeComponent } from "./components/home/home.component"
+import {AuthGuard} from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,15 +28,18 @@ const routes: Routes = [
   },
   {
     path: 'perfilDeportista',
-    component: PerfilAtletaComponent
+    component: PerfilAtletaComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'perfilEntrenador',
-    component: PerfilEntrenadorComponent
+    component: PerfilEntrenadorComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'mirarDeportistas',
-    component: MirarAtletasComponent
+    component: MirarAtletasComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'registroDeportista',
@@ -46,8 +50,8 @@ const routes: Routes = [
     component: RegistroEntrenadorComponent
   },
   {
-    path: 'rutina',
-    component: RutinaComponent
+    path: '**',
+    redirectTo:''
   }
 ];
 

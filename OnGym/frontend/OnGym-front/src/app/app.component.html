@@ -1,12 +1,13 @@
 <nav class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <span class="material-icons">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">
+            <span class="material-icons">
         fitness_center
-      </span>
-      On Gym
-    </a>
-  </div>
+      </span> On Gym
+
+            <button (click)=logout()>Cerrar sesion</button>
+        </a>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>

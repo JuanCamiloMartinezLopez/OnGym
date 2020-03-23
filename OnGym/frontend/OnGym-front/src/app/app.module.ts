@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule } from '@angular/common/http'
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,8 @@ import { PerfilAtletaComponent } from './components/perfil-atleta/perfil-atleta.
 import { PerfilEntrenadorComponent } from './components/perfil-entrenador/perfil-entrenador.component';
 import { MirarAtletasComponent } from './components/mirar-atletas/mirar-atletas.component';
 import {MatSelectModule} from '@angular/material/select';
+import {AuthGuard} from './services/auth.guard';
+import { TokenInterceptorService } from "./services/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,12 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthGuard,
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
