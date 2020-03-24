@@ -1,4 +1,4 @@
-div.row{
+/*div.row{
     background-image: url(https://image.freepik.com/foto-gratis/equipos-gimnasio-gimnasio_23-2147949744.jpg);
     background-position: center;
     background-size: cover;
@@ -7,17 +7,19 @@ div.row{
     height:100%;
     text-align: center;
 }
+*/
 
-div.card{
+div.card {
     background-color: whitesmoke;
-    width : 600px;
+    width: 600px;
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
-    font-family: georgia;
     font-size: 15px;
 }
 
+
+/*
 input {
      width: 250px;
 }
@@ -33,3 +35,4 @@ div.derecha{
 	height:100%;
 	float: right;
 }
+*/

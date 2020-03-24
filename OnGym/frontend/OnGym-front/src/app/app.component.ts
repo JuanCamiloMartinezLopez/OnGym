@@ -10,7 +10,14 @@ export class AppComponent {
   title = 'OnGym-front';
 
   constructor(private cb:ConnectionBackendService){
+  }
 
+  gettype(){
+    return this.cb.getType();
+  }
+
+  login(){
+    return this.cb.LoggedIn();
   }
 
   logout(){

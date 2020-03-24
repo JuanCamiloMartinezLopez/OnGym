@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectionBackendService } from "../../services/connection-backend.service";
+import { athlete } from "../../models/athlete";
 
 @Component({
   selector: 'app-mirar-atletas',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mirar-atletas.component.css']
 })
 export class MirarAtletasComponent implements OnInit {
-
-  constructor() { }
+  athletes:any=[];
+  constructor(private cb:ConnectionBackendService) { }
 
   ngOnInit(): void {
+    this.cb.getDeportistas().subscribe(
+      res=>{
+        this.athletes=res;
+      },
+      err=>console.error(err)
+    );
   }
 
 }

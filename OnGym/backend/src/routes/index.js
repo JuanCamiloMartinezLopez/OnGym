@@ -12,8 +12,9 @@ router.post('/login', async(req, res) => {
         mail,
         password
     }
-    console.log(newUser)
-    pool.query('SELECT * FROM ' + type + ' WHERE mail=? ', [mail], async function(error, results, fields) {
+    console.log(newUser);
+    console.log(type);
+    pool.query('SELECT * FROM ' + type + ' WHERE mail=? ', mail, async function(error, results, fields) {
         if (error) {
             console.log(error);
             res.status(400).send(error);
@@ -23,7 +24,7 @@ router.post('/login', async(req, res) => {
             console.log(user);
             const validPassword = await helpers.matchPassword(password, user.password)
             if (validPassword) {
-                if (type == 'trainer') {
+                if (type == 'Trainer') {
                     const token = jwt.sign({ _id: user.idTrainer, _type: type }, 'OnGym');
                     return res.status(200).json({ token });
                 } else {
@@ -67,7 +68,7 @@ router.post('/singUpTrainer', async(req, res) => {
                 } else {
                     newTrainer.idTrainer = results.insertId;
                     console.log(newTrainer);
-                    const token = jwt.sign({ _id: newTrainer.idTrainer, _type: 'trainer' }, 'OnGym');
+                    const token = jwt.sign({ _id: newTrainer.idTrainer, _type: 'Trainer' }, 'OnGym');
                     res.status(200).json({ token });
                 }
             });
@@ -99,12 +100,11 @@ router.post('/singUpAthlete', async(req, res) => {
             pool.query('select idTrainer from trainer where nAthletes in (select min(nAthletes) from trainer);', function(error, results, fields) {
                 if (error) {
                     console.log(error);
-                    newAthlete.idTrainerA = 0;
+                    newAthlete.Trainer_idTrainer = 0;
                 }
                 if (results.length > 0) {
-                    console.log(results[0].idTrainer);
-                    newAthlete.idTrainerA = results[0].idTrainer;
-                    pool.query('update trainer set nAthletes=nAthletes+1 where idtrainer=?', newAthlete.idTrainerA, function(error, results, fields) {
+                    newAthlete.Trainer_idTrainer = results[0].idTrainer;
+                    pool.query('update trainer set nAthletes=nAthletes+1 where idtrainer=?', newAthlete.Trainer_idTrainer, function(error, results, fields) {
                         if (error) {
                             res.status(500).send('error al registrarse')
                         }
@@ -113,7 +113,7 @@ router.post('/singUpAthlete', async(req, res) => {
                         }
                     })
                 } else {
-                    newAthlete.idTrainerA = 0;
+                    newAthlete.Trainer_idTrainer = 0;
                 }
             });
             await pool.query('INSERT INTO athlete set ?', newAthlete, function(error, results, fields) {
@@ -121,9 +121,10 @@ router.post('/singUpAthlete', async(req, res) => {
                     console.log(error);
                 } else {
                     console.log(results);
-                    newAthlete.id = results.insertId;
+                    newAthlete.idAthlete = results.insertId;
                     console.log(newAthlete);
-                    res.status(200).send('deportista agregado');
+                    const token = jwt.sign({ _id: newAthlete.idAthlete, _type: 'Athlete' }, 'OnGym');
+                    res.status(200).json({ token });
                 }
             });
         }
@@ -142,28 +143,47 @@ router.post('/postExercise', verifyToken, (req, res) => {
 
 })
 
-router.get('/getAthletes', verifyToken, (req, res) => {
+router.get('/prueba', (req, res) => {
+    pool.query("select * from trainer")
+})
 
+router.get('/getAthletes', verifyToken, (req, res) => {
+    const { idTrainer } = req.body;
+    console.log(req.body)
+    pool.query('select * from athlete where idTrainerA=?', idTrainer, function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error);
+        }
+        console.log(results);
+        if (results.length > 0) {
+            res.status(200).json(results);
+        } else {
+            res.status(201).json('No tienes deportistas asignados')
+        }
+    })
 })
 
 module.exports = router;
 
 function verifyToken(req, res, next) {
-    console.log(req.headers);
     if (!req.headers.authorization) {
-        return res.redirect('/login');
+        return res.res.status(401).send('Unauhtorized Request');
     }
     const token = req.headers.authorization.split(' ')[1];
     if (token === null) {
-        return res.redirect('/login');
+        return res.status(401).send('Unauhtorized Request');
     }
     const payload = jwt.verify(token, 'OnGym');
-    if (payload._type == 'trainer') {
-        console.log(payload._id);
-        req.idTrainer = payload._id;
+    console.log(payload)
+    if (payload._type == 'Trainer') {
+
+        req.body.idTrainer = payload._id;
+        console.log(req.body);
+        next();
     }
     if (payload._type == 'Athlete') {
-        req.idAthlete = payload._id;
+        req.body.idAthlete = payload._id;
+        next();
     }
-    next();
+
 }

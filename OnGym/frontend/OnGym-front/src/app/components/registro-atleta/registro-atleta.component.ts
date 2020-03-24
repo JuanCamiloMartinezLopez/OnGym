@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConnectionBackendService} from '../../services/connection-backend.service';
+import { athlete } from "../../models/athlete";
+
 
 @Component({
   selector: 'app-registro-atleta',
@@ -10,17 +12,16 @@ export class RegistroAtletaComponent implements OnInit {
 
   constructor(private cb:ConnectionBackendService) { }
 
-  deportista = {
-    nombres:'',
-    primerapellido:'',
-    segundoapellido:'',
-    correo:'',
+  deportista:athlete = {
+    names:'',
+    surname:'',
+    secondsurname:'',
+    mail:'',
     password:'',
-    direccion:'',
-    telefono:'',
-    peso:undefined,
-    estatura:undefined,
-    idEntrenadorD:0
+    address:'',
+    phone:'',
+    weight:undefined,
+    height:undefined
 }
 
   ngOnInit(): void {
@@ -30,6 +31,7 @@ export class RegistroAtletaComponent implements OnInit {
     console.log(this.deportista);
     this.cb.RegistroEntrenador(this.deportista).subscribe(res =>{
       console.log(res)
+      localStorage.setItem('token',res.token);
     },
     err=>{
       console.log(err)

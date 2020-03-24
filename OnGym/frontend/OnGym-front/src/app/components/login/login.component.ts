@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConnectionBackendService} from '../../services/connection-backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { user } from "../../models/user";
 
 
 @Component({
@@ -9,24 +10,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user={
-    correo:'',
+  registroRedirect:string;
+  profileRedirect:string;
+  type:string;
+  user:user={
+    mail:'',
     password:'',
     type:''
-  }
-  registroRedirect;
-  profileRedirect;
+  };
   constructor(private cb:ConnectionBackendService, private rutaActiva:ActivatedRoute, private router:Router ) { }
 
   ngOnInit(): void {
     this.user.type=this.rutaActiva.snapshot.params.type;
     console.log(this.user.type);
-    if(this.user.type=='entrenador'){
-      this.registroRedirect="/registroEntrenador";
-      this.profileRedirect="/perfilEntrenador";
+    if(this.user.type=='Trainer'){
+      this.registroRedirect="/registro/entrenador";
+      this.profileRedirect="/perfil/entrenador";
     }else{
-      this.registroRedirect="/registroDeportista";
-      this.profileRedirect="/perfilDeportista";
+      this.registroRedirect="/registro/deportista";
+      this.profileRedirect="/perfil/deportista";
     }
   }
 

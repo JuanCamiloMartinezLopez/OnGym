@@ -1,33 +1,27 @@
 <div class="row">
     <div class="container">
         <br><br><br>
-        <div class="card">
+        <div class="card text-center">
             <div class="card-header">
                 Iniciar Sesión
             </div>
             <div class="card-body">
-                <form (submit)="login()">
+                <form>
                     <div class="form-group">
-                        <input type="email" [(ngModel)]="user.correo" name="correo" class="form-control" placeholder="Email" required autofocus>
+                        <input type="email" [(ngModel)]="user.mail" name="correo" class="form-control" placeholder="Email" required autofocus>
                     </div>
                     <div class="form-group">
                         <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Contraseña" required>
                     </div>
-<<<<<<< HEAD
-                    <button mat-stroked-button type="submit">
-            Iniciar Sesión
-          </button>
-=======
-                    <button routerLink={{profileRedirect}} type="submit" class="btn btn-primary">
-                        Iniciar Sesión
+                    <button type="submit" class="btn btn-success" (click)="login()" routerLink={{profileRedirect}}>
+                        Ingresar
                     </button>
->>>>>>> 92cf15bad4a23afc491c268362fb852ad806bac2
                     <br><br>
                     <div class="form-group">
                         Si no está registrado, lo puede hacer acá:
                     </div>
-                    <button type="button" class="btn btn-primary" routerLink={{registroRedirect}}>
-                        Registro
+                    <button type="button" class="btn btn-success" routerLink={{registroRedirect}}>
+                        Registrarse
                     </button>
                 </form>
             </div>

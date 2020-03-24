@@ -2,46 +2,32 @@
     <div class="container">
         <br><br>
         <div class="card">
-            <div class="card-header">
-                Registro
+            <div class="card-header text-center">
+                Registro Deportista
             </div>
             <div class="card-body">
-                <form (submit)="registroatleta()">
-                    <div class="hola">
-                        <div class="izquierda">
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.nombres" name="nombres" class="form-control" placeholder="Nombres" required autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.primerapellido" name="primerapellido" class="form-control" placeholder="Primer apellido" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.segundoapellido" name="segundoapellido" class="form-control" placeholder="Segundo apellido" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.correo" name="correo" class="form-control" placeholder="Correo" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" [(ngModel)]="deportista.password" name="password" class="form-control" placeholder="Contraseña" required>
-                            </div>
+                <form>
+                    <div class="form-group m-1">
+                        <input class="form-control" type="text" [(ngModel)]="deportista.names" name="nombres" placeholder="Nombres" required autofocus>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col ">
+                            <input type="text" [(ngModel)]="deportista.surname" name="primerapellido" class="form-control mt-3" placeholder="Primer apellido" required>
+                            <input type="email" [(ngModel)]="deportista.mail" name="correo" class="form-control mt-3" placeholder="Correo" required>
+                            <input type="text" [(ngModel)]="deportista.address" name="direccion" class="form-control mt-3" placeholder="Dirección" required>
+                            <input type="text" [(ngModel)]="deportista.weight" name="peso" class="form-control mt-3" placeholder="Peso(kilogramos)" required>
                         </div>
-                        <div class="derecha">
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.direccion" name="direccion" class="form-control" placeholder="Dirección" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.telefono" name="telefono" class="form-control" placeholder="Teléfono" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.peso" name="peso" class="form-control" placeholder="Peso(kilogramos)" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="deportista.estatura" name="estatura" class="form-control" placeholder="Estatura(metros)" required>
-                            </div>
-                            <button class="btn btn-primary" routerLink="/perfilDeportista" type="submit">
+                        <div class="col">
+                            <input type="text" [(ngModel)]="deportista.secondsurname" name="segundoapellido" class="form-control mt-3" placeholder="Segundo apellido" required>
+                            <input type="password" [(ngModel)]="deportista.password" name="password" class="form-control mt-3" placeholder="Contraseña" required>
+                            <input type="text" [(ngModel)]="deportista.phone" name="telefono" class="form-control mt-3" placeholder="Teléfono" required>
+                            <input type="text" [(ngModel)]="deportista.height" name="estatura" class="form-control mt-3" placeholder="Estatura(metros)" required>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center p-2">
+                        <button class="btn btn-success" type="button" (click)="registroatleta()" routerLink="/perfil/deportista">
                                 Registrarse
-                            </button>
-                        </div>
+                    </button>
                     </div>
                 </form>
             </div>

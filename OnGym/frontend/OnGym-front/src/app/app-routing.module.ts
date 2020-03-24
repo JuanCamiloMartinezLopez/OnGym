@@ -23,30 +23,36 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'ejercicio',
-    component: EjercicioComponent
+    path: 'perfil/entrenador/ejercicios',
+    component: EjercicioComponent,
+    canActivate:[AuthGuard]
   },
   {
-    path: 'perfilDeportista',
+    path: 'perfil/deportista',
     component: PerfilAtletaComponent,
     canActivate:[AuthGuard]
   },
   {
-    path: 'perfilEntrenador',
+    path: 'perfil/entrenador',
     component: PerfilEntrenadorComponent,
     canActivate:[AuthGuard]
   },
   {
-    path: 'mirarDeportistas',
+    path: 'perfil/entrenador/deportistas',
     component: MirarAtletasComponent,
     canActivate:[AuthGuard]
   },
   {
-    path: 'registroDeportista',
+    path: 'perfil/entrenador/rutinas',
+    component: RutinaComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'registro/deportista',
     component: RegistroAtletaComponent
   },
   {
-    path: 'registroEntrenador',
+    path: 'registro/entrenador',
     component: RegistroEntrenadorComponent
   },
   {
