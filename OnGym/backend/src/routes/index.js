@@ -25,8 +25,9 @@ router.post('/login', async(req, res) => {
             const validPassword = await helpers.matchPassword(password, user.password)
             if (validPassword) {
                 if (type == 'Trainer') {
+                    const names = user.names;
                     const token = jwt.sign({ _id: user.idTrainer, _type: type }, 'OnGym');
-                    return res.status(200).json({ token });
+                    return res.status(200).json({ token, names });
                 } else {
                     const token = jwt.sign({ _id: user.idAthlete, _type: type }, 'OnGym');
                     return res.status(200).json({ token });
@@ -130,27 +131,96 @@ router.post('/singUpAthlete', async(req, res) => {
         }
     })
 })
+router.get('/getNumberRoutines', verifyToken, async(req, res) => {
+    await pool.query('select * from routines;', function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error);
+        }
+        if (results) {
+            res.status(200).send(results)
+        }
+    })
+})
 
-router.get('/getRoutines', verifyToken, (req, res) => {
+router.post('/postAthleteRoutine', verifyToken, (req, res) => {
+    const { idAthlete, idRoutines } = req.body;
+    pool.query('insert into routines_has_athlete(Athlete_idAthlete,Routines_idRoutines) values (?,?);', [idAthlete, idRoutines], function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error);
+        }
+        if (results) {
+            res.status(200).send(results)
+        }
+    })
+})
+
+router.get('/getMyRoutines', verifyToken, (req, res) => {
+    const { idAthlete } = req.body;
+    pool.query('select routines.idRoutines from routines join athlete_has_routines on athlete_has_routines.Routines_idRoutines = routines.idRoutines join athlete on athlete.idAthlete = athlete_has_routines.Athlete_idAthlete where athlete.idAthlete = ? ', idAthlete, function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error)
+        }
+        if (results) {
+            pool.query('select routines.name, exercises.name, exercise.image,exercise.description,exercise.set, exercise.repetitions from exercises join routines_has_exercises on routines_has_exercises.Exercises_idExercises = exercises.idExercises join routines on routines.idRoutines = routines_has_exercises.Routines_idRoutines where routines.idRoutines = ? ', results[0], function(error, results, fields) {
+                if (error) {
+                    res.status(400).send(error)
+                }
+                if (results) {
+                    res.send(results)
+                }
+            })
+        }
+    })
 
 })
 
-router.post('/postRoutine', verifyToken, (req, res) => {
-
+router.get('/getRoutines', verifyToken, async(req, res) => {
+    await pool.query('select routines.idRoutines,routines.name,routines.price,exercises.idExercises,exercises.name  from exercises join routines_has_exercises on routines_has_exercises.Exercises_idExercises = exercises.idExercises join routines on routines.idRoutines = routines_has_exercises.Routines_idRoutines ;', function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error);
+        }
+        if (results) {
+            res.status(200).send(results)
+        }
+    })
 })
 
-router.post('/postExercise', verifyToken, (req, res) => {
-
+router.get('/getExercises', verifyToken, (req, res) => {
+    pool.query('SELECT * FROM exercises;', function(error, results, fields) {
+        if (error) {
+            res.status(500).send({ message: error })
+        }
+        if (results) {
+            res.status(200).json(results);
+        }
+    })
 })
 
-router.get('/prueba', (req, res) => {
-    pool.query("select * from trainer")
+router.post('/postRutine', verifyToken, (req, res) => {
+    console.log(req.body)
+    const { name, price, exercises } = req.body;
+    pool.query('insert into `routines`(`name`,`price`) values (?,?)', [name, price], function(error, results, fields) {
+        if (error) {
+            res.status(400).send(error)
+        }
+        if (results) {
+            idroutine = results.insertId;
+            for (var i = 0; i < exercises.length; i++) {
+                pool.query('insert into routines_has_exercises(Routines_idRoutines,Exercises_idExercises) values (?,?);', [idroutine, exercises[i].idExercises], function(error, results, fields) {
+                    if (error) {
+                        res.status(400).send(error)
+                    }
+                })
+            }
+            res.status(200).send('rutina creada');
+        }
+    })
 })
 
 router.get('/getAthletes', verifyToken, (req, res) => {
     const { idTrainer } = req.body;
     console.log(req.body)
-    pool.query('select * from athlete where idTrainerA=?', idTrainer, function(error, results, fields) {
+    pool.query('select * from athlete where Trainer_idTrainer=?', idTrainer, function(error, results, fields) {
         if (error) {
             res.status(400).send(error);
         }
@@ -158,7 +228,7 @@ router.get('/getAthletes', verifyToken, (req, res) => {
         if (results.length > 0) {
             res.status(200).json(results);
         } else {
-            res.status(201).json('No tienes deportistas asignados')
+            res.status(201).send('No tienes deportistas asignados')
         }
     })
 })

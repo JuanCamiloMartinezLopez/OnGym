@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     this.cb.logIn(this.user).subscribe(res =>{
       console.log(res);
       localStorage.setItem('token',res.token);
+      localStorage.setItem('names',res.names);
       this.router.navigate([this.profileRedirect]);
     },
     err=>{

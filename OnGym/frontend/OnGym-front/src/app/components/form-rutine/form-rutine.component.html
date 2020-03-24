@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="container">
+            <br><br><br>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Crea tu rutina</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="routine.name" name="name" class="form-control mt-3" placeholder="Nombre rutina" required autofocus>
+                                    <input type="text" [(ngModel)]="routine.price" name="precio" class="form-control mt-3" placeholder="Precio" required>
+                                </div>
+                            </form>
+                            <mat-form-field>
+                                <mat-label>Escoja un ejercicio</mat-label>
+                                <mat-select [(value)]="iE">
+                                    <mat-option *ngFor="let exercise of exercises" [value]="exercise.idExercises-1">
+                                        {{exercise.idExercises}}. {{exercise.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <a class="btn btn-success text-white" (click)="agregarEjercicios()">agregar ejercicio</a>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label>Ejercicios agregados</label>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let e of routine.exercises">{{e.idExercises}}. {{e.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center m-3">
+                        <a class="btn btn-success text-white" (click)="crearRutina()">Crear</a>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 ">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-center text-white d-flex justify-content-between align-items-center">
+                        <h4 class="text-center text-white">{{exercises[iE].idExercises}}.{{exercises[iE].name}}</h4>
+                    </div>
+
+                    <div class="card-body d-block">
+                        <img class="card-img-top" [src]="exercises[iE].image">
+                        <h4>descripcion</h4>
+                        <p>{{exercises[iE].description}}</p>
+                        <h4>set's</h4>
+                        <p>{{exercises[iE].set}}</p>
+                        <h4>repeticiones</h4>
+                        <p>{{exercises[iE].repetitions}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

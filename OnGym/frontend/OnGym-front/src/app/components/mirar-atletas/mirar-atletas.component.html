@@ -1,11 +1,26 @@
 <div class="col-md-4" *ngFor="let athlete of athletes">
-    <div class="card text-center">
-        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-            {{athlete.names}} {{athlete.surname}} {{athlete.secondsurname}}
+    <div class="card m-2 text-center">
+        <div class="card-header bg-dark text-center d-flex justify-content-between align-items-center">
+            <h2 class="text-white">{{athlete.idAthlete}}. {{athlete.names}} {{athlete.surname}} {{athlete.secondsurname}}</h2>
         </div>
         <div class="card-body">
+            <h4>Correo</h4>
             <p>{{athlete.mail}}</p>
+            <h4>Telefono</h4>
+            <p>{{athlete.phone}}</p>
+            <h4>Peso</h4>
             <p>{{athlete.weight}}</p>
+            <h4>Estatura</h4>
+            <p>{{athlete.height}}</p>
+            <mat-form-field>
+                <mat-label>Escoja una rutina</mat-label>
+                <mat-select [(value)]="ie">
+                    <mat-option *ngFor="let routine of routin" [value]="routine.idRoutines">
+                        {{routine.idRoutines}}. {{routine.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="btn btn-success" type="button" (click)="asignarRutina(athlete.idAthlete)">Asignar Rutina</button>
         </div>
     </div>
 </div>

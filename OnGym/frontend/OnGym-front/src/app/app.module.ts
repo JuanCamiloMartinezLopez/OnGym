@@ -19,6 +19,7 @@ import { MirarAtletasComponent } from './components/mirar-atletas/mirar-atletas.
 import {MatSelectModule} from '@angular/material/select';
 import {AuthGuard} from './services/auth.guard';
 import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { FormRutineComponent } from './components/form-rutine/form-rutine.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TokenInterceptorService } from "./services/token-interceptor.service";
     HomeComponent,
     PerfilAtletaComponent,
     PerfilEntrenadorComponent,
-    MirarAtletasComponent
+    MirarAtletasComponent,
+    FormRutineComponent
   ],
   imports: [
     BrowserModule,

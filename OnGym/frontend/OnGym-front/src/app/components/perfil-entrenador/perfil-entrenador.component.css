@@ -1,0 +1,8 @@
+div.card {
+    background-color: whitesmoke;
+    width: 600px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    font-size: 15px;
+}

@@ -29,9 +29,10 @@ export class RegistroAtletaComponent implements OnInit {
 
   registroatleta(){
     console.log(this.deportista);
-    this.cb.RegistroEntrenador(this.deportista).subscribe(res =>{
+    this.cb.RegistroDeportista(this.deportista).subscribe(res =>{
       console.log(res)
       localStorage.setItem('token',res.token);
+      localStorage.setItem('names',this.deportista.names);
     },
     err=>{
       console.log(err)

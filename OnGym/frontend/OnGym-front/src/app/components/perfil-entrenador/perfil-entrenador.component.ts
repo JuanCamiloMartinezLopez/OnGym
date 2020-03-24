@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-entrenador.component.css']
 })
 export class PerfilEntrenadorComponent implements OnInit {
-
+  names:string;
   constructor() { }
 
   ngOnInit(): void {
+    this.names=localStorage.getItem('names');
   }
 
 }

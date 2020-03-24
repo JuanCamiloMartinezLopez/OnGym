@@ -12,6 +12,7 @@ import {PerfilEntrenadorComponent} from "./components/perfil-entrenador/perfil-e
 import {RutinaComponent} from "./components/rutina/rutina.component"
 import { HomeComponent } from "./components/home/home.component"
 import {AuthGuard} from './services/auth.guard';
+import { FormRutineComponent } from './components/form-rutine/form-rutine.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'registro/entrenador',
     component: RegistroEntrenadorComponent
+  },
+  {
+    path:'perfil/entrenador/crearRutina',
+    component:FormRutineComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: '**',

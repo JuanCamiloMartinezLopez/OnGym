@@ -25,6 +25,7 @@ export class RegistroEntrenadorComponent implements OnInit {
     console.log(this.entrenador);
     this.cb.RegistroEntrenador(this.entrenador).subscribe(res =>{
       localStorage.setItem('token',res.token);
+      localStorage.setItem('names',this.entrenador.names);
       console.log(res)
     },
     err=>{
